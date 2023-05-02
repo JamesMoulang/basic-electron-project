@@ -1,4 +1,6 @@
-What do we need to do to create and distribute an electron app?
+A starter project, mainly for my own use, to set up a new electron project with steamworks.js functionality and notarisation on macOS.
+
+# What is needed to publish an electron app?
 
 1. Actually write the thing
 2. Bundle the thing into static assets
