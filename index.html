@@ -35,12 +35,6 @@
   <h1 id='loading'>L O A D I N G</h1>
   <h1 id='smile'></h1>
   <script>
-    const {ipcRenderer} = require('electron');
-    
-    window.getSteamClient = () => {
-      return ipcRenderer.sendSync('get_steamworks');
-    };
-
     document.addEventListener('contextmenu', event => event.preventDefault());
     
     let smiley = -1;
@@ -54,6 +48,53 @@
     };
 
     update();
+  </script>
+  <script>
+    // Bind functions to Inter Process Connection
+    const {ipcRenderer} = require('electron');
+
+    // -------------------------------------------------------------
+    // Electron Application
+    
+    // quit to desktop
+    window.closeElectronApp = () => {
+      console.log("hello world");
+      ipcRenderer.send('close-me')
+    };
+
+    // full screen
+    window.electronFullScreen = (enabled) => {
+      remote.getCurrentWindow().setFullScreen(enabled);
+    };
+
+    // -------------------------------------------------------------
+    // Steamworks
+
+    window.triggerAchievement = (achievement_name) => {
+      ipcRenderer.send('trigger_achievement', achievement_name);
+    };
+
+    // -------------------------------------------------------------
+    // Save / Load
+
+    // save
+    window.electronSave = (data, filename, platform_specific, steam_id) => {
+      console.log("Electron Saving");
+      ipcRenderer.send('save', data, filename, platform_specific, steam_id);
+    };
+
+    ipcRenderer.send('save', 'hello world');
+
+    // load
+    window.electronLoad = (filename, platform_specific, steam_id) => {
+      console.log('electronLoad', filename, platform_specific, steam_id);
+      try {
+        console.log("Electron Loading");
+        return { data: ipcRenderer.sendSync('load', filename, platform_specific, steam_id), err: null }
+      } catch (err) {
+        return { data: null, err };
+      }
+    };
   </script>
   <div id="root"/>
   
