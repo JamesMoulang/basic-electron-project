@@ -53,18 +53,20 @@
     // Bind functions to Inter Process Connection
     const {ipcRenderer} = require('electron');
 
+    console.log('ipc binding');
+
     // -------------------------------------------------------------
     // Electron Application
     
     // quit to desktop
     window.closeElectronApp = () => {
       console.log("hello world");
-      ipcRenderer.send('close-me')
+      ipcRenderer.send('close-me');
     };
 
     // full screen
-    window.electronFullScreen = (enabled) => {
-      remote.getCurrentWindow().setFullScreen(enabled);
+    window.electronFullScreenToggle = () => {
+      ipcRenderer.send('toggle_fullscreen');
     };
 
     // -------------------------------------------------------------

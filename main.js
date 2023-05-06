@@ -38,6 +38,14 @@ app.whenReady().then(() => {
   // initialise save manager - allows us to save/load game files
   save_manager.init(mainWindow, ipcMain, steam_manager.getSteamId().steamId64, 'kana_save.json');
 
+  ipcMain.on('toggle_fullscreen', function() {
+    if (mainWindow.isFullScreen()) {
+      mainWindow.setFullScreen(false);
+    } else {
+      mainWindow.setFullScreen(true);
+    }
+  });
+
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
