@@ -83,8 +83,6 @@
       ipcRenderer.send('save', data, filename, platform_specific, steam_id);
     };
 
-    ipcRenderer.send('save', 'hello world');
-
     // load
     window.electronLoad = (filename, platform_specific, steam_id) => {
       console.log('electronLoad', filename, platform_specific, steam_id);

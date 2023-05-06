@@ -19,8 +19,6 @@ const init = (_mainWindow, _ipc, steamapp_id=480) => {
 	
 	console.log(`Initialised steamworks, username is ${steamworks_client.localplayer.getName()}.`);
 
-	steamworks_client.achievement.activate('katakana_challenge');
-
 	// -------------------------------------------------------------
 	// Bind functions to Inter Process Connection
 
